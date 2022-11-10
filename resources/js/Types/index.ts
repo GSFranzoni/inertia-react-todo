@@ -11,3 +11,8 @@ export type CreateTodo = {
 export type DeleteTodo = {
   id: number;
 };
+
+export type UpdateCompletedTodo = {
+  id: number;
+  completed: boolean;
+};

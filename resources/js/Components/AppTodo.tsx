@@ -1,17 +1,22 @@
 import React from 'react';
 import {
+  Badge,
   BoxProps,
+  Flex,
   HStack,
   IconButton,
   Text,
   useDisclosure,
   useModal,
+  useTheme,
 } from '@chakra-ui/react';
-import { CloseIcon } from '@chakra-ui/icons';
-import { Todo } from '../Types';
+import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
+import { BiLock, FaTrash, FcCancel, FcDeleteRow } from 'react-icons/all';
+import { Todo, UpdateCompletedTodo } from '../Types';
 import AppCard from './AppCard';
 import AppConfirmationDialog from './AppConfirmationDialog';
 import useDeleteTodo from '../Hooks/useDeleteTodo';
+import useCompleteTodo from '../Hooks/useCompleteTodo';
 
 type AppTodoProps = BoxProps & {
   todo: Todo;
@@ -19,20 +24,43 @@ type AppTodoProps = BoxProps & {
 
 const AppTodo: React.FC<AppTodoProps> = ({ todo, ...props }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { deleteTodo, processing } = useDeleteTodo();
+  const { deleteTodo, processing: deleting } = useDeleteTodo();
+  const { updateCompletedTodo, processing: updating } = useCompleteTodo();
   return (
-    <AppCard borderRadius={10} {...props}>
+    <AppCard borderRadius={10} {...props} boxShadow="base">
       <HStack justifyContent="space-between">
         <Text textDecoration={todo.completed ? 'line-through' : 'none'}>
           {todo.description}
+          {todo.completed && (
+            <Badge ml={2} colorScheme="green" rounded="md">
+              <Text fontSize="xx-small">Completed</Text>
+            </Badge>
+          )}
         </Text>
-        <IconButton
-          aria-label="Delete"
-          size="xs"
-          icon={<CloseIcon />}
-          isLoading={processing}
-          onClick={() => onOpen()}
-        />
+        <Flex gap={1}>
+          <IconButton
+            aria-label={todo.completed ? 'Incomplete' : 'Complete'}
+            size="xs"
+            isLoading={updating}
+            onClick={() =>
+              updateCompletedTodo({ id: todo.id, completed: !todo.completed })
+            }
+            icon={
+              todo.completed ? (
+                <FcCancel color="red.400" />
+              ) : (
+                <CheckIcon color="green.400" />
+              )
+            }
+          />
+          <IconButton
+            aria-label="Delete"
+            size="xs"
+            icon={<FaTrash color="gray" />}
+            isLoading={deleting}
+            onClick={() => onOpen()}
+          />
+        </Flex>
       </HStack>
       <AppConfirmationDialog
         title="Confirm"

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTodoRequest;
+use App\Http\Requests\UpdateTodoRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Controller;
@@ -41,5 +42,14 @@ class TodoController extends Controller
         return redirect()
             ->intended(route('todos.index'))
             ->with('success', __('todo.deleted'));
+    }
+
+    public function update(UpdateTodoRequest $request, int $id): RedirectResponse
+    {
+        $todo = $request->user()->todos()->findOrFail($id);
+        $todo->update($request->validated());
+        return redirect()
+            ->intended(route('todos.index'))
+            ->with('success', __('todo.updated'));
     }
 }

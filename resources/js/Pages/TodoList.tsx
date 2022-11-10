@@ -49,6 +49,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
               placeholder="Add new todo"
               disabled={processing}
               value={description}
+              fontSize="md"
               onChange={(e) => setDescription(e.target.value)}
               onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => {
                 if (event.key === 'Enter') {
@@ -59,7 +60,8 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
             <InputRightElement>
               <IconButton
                 isLoading={processing}
-                rounded="xl"
+                rounded="md"
+                size="sm"
                 aria-label="Add"
                 icon={<AddIcon />}
                 type="submit"
