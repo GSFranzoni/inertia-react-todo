@@ -38,7 +38,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
   return (
     <MainLayout>
       <Flex justifyContent="center" width="100%">
-        <VStack spacing={4} width="500px" maxW="100%">
+        <VStack spacing={2} width="500px" maxW="100%">
           {todos.map((todo) => (
             <AppTodo todo={todo} key={todo.id} width="100%" />
           ))}
