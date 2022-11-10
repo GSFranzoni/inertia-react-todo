@@ -16,10 +16,10 @@ const useCreateTodo = () => {
     });
   };
 
-  const onError = () => {
+  const onError = (errors: Record<string, string>) => {
     toast({
       title: 'Error',
-      description: 'There was an error creating your todo',
+      description: errors.description,
       status: 'error',
     });
   };
