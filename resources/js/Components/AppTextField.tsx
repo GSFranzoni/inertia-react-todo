@@ -1,4 +1,4 @@
-import { Flex, Input, InputProps, Text } from '@chakra-ui/react';
+import { Flex, Input, InputProps, ScaleFade, Text } from '@chakra-ui/react';
 import React from 'react';
 
 type TextFieldProps = InputProps & {
@@ -12,11 +12,13 @@ const AppTextField: React.FC<TextFieldProps> = ({ label, hint, ...props }) => (
       {label}
     </Text>
     <Input {...props} />
-    {hint && (
-      <Text fontSize="xs" color="red.500" fontWeight={500}>
-        {hint}
-      </Text>
-    )}
+    <ScaleFade in={!!hint} unmountOnExit>
+      {hint && (
+        <Text fontSize="xs" color="red.500" fontWeight={500}>
+          {hint}
+        </Text>
+      )}
+    </ScaleFade>
   </Flex>
 );
 
