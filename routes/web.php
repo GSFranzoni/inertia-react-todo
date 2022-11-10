@@ -15,16 +15,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/home', TodoController::class)->name('todos.index');
-Route::post('/todos', [TodoController::class, 'store'])->name('todos.store');
-Route::delete('/todos/{id}', [TodoController::class, 'destroy'])->name('todos.destroy');
-Route::patch('/todos/{id}', [TodoController::class, 'update'])->name('todos.update'); // Todo: use patch instead of post
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', TodoController::class)->name('todos.index');
+    Route::post('/todos', [TodoController::class, 'store'])->name('todos.store');
+    Route::delete('/todos/{id}', [TodoController::class, 'destroy'])->name('todos.destroy');
+    Route::patch('/todos/{id}', [TodoController::class, 'update'])->name('todos.update'); // Todo: use patch instead of post
+});
+
 
 /*
 |--------------------------------------------------------------------------
 | Auth Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', [LoginController::class, 'index'])->name('auth.login.index');
+Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.login.index');
 Route::post('/auth/login', LoginController::class)->name('auth.login');
 Route::post('/auth/logout', LogoutController::class)->name('auth.logout');
