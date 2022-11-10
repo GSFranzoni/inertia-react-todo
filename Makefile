@@ -128,7 +128,3 @@ controller: ## Create controller
 request: ## Create request
 	docker exec -it todo-nginx php artisan make:request $(name)
 
-##@ Helpers
-
-// run factory
-
