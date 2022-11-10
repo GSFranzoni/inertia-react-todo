@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\FakeController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/home', TodoController::class)->name('todos.index');
 Route::post('/todos', [TodoController::class, 'store'])->name('todos.store');
+Route::delete('/todos/{id}', [TodoController::class, 'destroy'])->name('todos.destroy');
 
 /*
 |--------------------------------------------------------------------------

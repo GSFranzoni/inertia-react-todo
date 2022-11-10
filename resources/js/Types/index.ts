@@ -7,3 +7,7 @@ export type Todo = {
 export type CreateTodo = {
   description: string;
 };
+
+export type DeleteTodo = {
+  id: number;
+};

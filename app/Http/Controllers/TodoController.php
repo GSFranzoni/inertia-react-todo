@@ -29,4 +29,17 @@ class TodoController extends Controller
             ->intended(route('todos.index'))
             ->with('success', __('todo.created'));
     }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request, int $id): RedirectResponse
+    {
+        $request->user()->todos()->findOrFail($id)->delete();
+        return redirect()
+            ->intended(route('todos.index'))
+            ->with('success', __('todo.deleted'));
+    }
 }

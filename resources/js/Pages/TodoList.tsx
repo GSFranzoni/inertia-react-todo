@@ -4,16 +4,18 @@ import {
   AlertDescription,
   AlertTitle,
   Box,
+  Fade,
   Flex,
   FormControl,
   IconButton,
   Input,
   InputGroup,
   InputRightElement,
-  useToast,
+  Slide,
   VStack,
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
+import { AnimatePresence } from 'framer-motion';
 import { Todo } from '../Types';
 import AppTodo from '../Components/AppTodo';
 import MainLayout from '../Layouts/MainLayout';
