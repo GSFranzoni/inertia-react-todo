@@ -61,7 +61,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
               <IconButton
                 isLoading={processing}
                 rounded="md"
-                size="sm"
+                size="xs"
                 aria-label="Add"
                 icon={<AddIcon />}
                 type="submit"
