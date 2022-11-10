@@ -12,24 +12,9 @@ class TodoController extends Controller
 {
     public function __invoke(Request $request): Response
     {
+        $todos = $request->user()->todos()->get()->toArray();
         return inertia('TodoList', [
-            'todos' => [
-                [
-                    'id' => 1,
-                    'description' => 'Learn Inertia.js',
-                    'completed' => false,
-                ],
-                [
-                    'id' => 2,
-                    'description' => 'Learn Laravel',
-                    'completed' => true,
-                ],
-                [
-                    'id' => 3,
-                    'description' => 'Learn Vue.js',
-                    'completed' => false,
-                ],
-            ],
+            'todos' => $todos,
         ]);
     }
 
