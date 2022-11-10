@@ -38,7 +38,7 @@ init: ## Start a new develop environment
 	$(MAKE) permissions
 
 keys: ## Generate secret keys
-	docker exec -it printer-manager-nginx php artisan key:generate
+	docker exec -it todo-nginx php artisan key:generate
 
 ##@ Docker actions
 
@@ -61,7 +61,7 @@ log: ## Open the logs and follow the news
 	docker-compose logs --follow
 
 restart: ## Restart the app container
-	docker-compose restart printer-manager-nginx
+	docker-compose restart todo-nginx
 
 ps: ## List containers
 	docker-compose -f docker-compose.yml ps
@@ -69,64 +69,64 @@ ps: ## List containers
 ##@ Bash controls
 
 bash: ## Start nginx bash
-	docker exec -it printer-manager-nginx bash
+	docker exec -it todo-nginx bash
 
 nginx: ## Start nginx bash
-	docker exec -it printer-manager-nginx bash
+	docker exec -it todo-nginx bash
 
 mysql: ## Start mysql bash
-	docker exec -it printer-manager-mysql bash
+	docker exec -it todo-mysql bash
 
 node: ## Start mysql bash
-	docker exec -it printer-manager-node sh
+	docker exec -it todo-node sh
 
 ##@ Database tools
 
 migration: ## Create migration file
-	docker exec -it printer-manager-nginx php artisan make:migration $(name)
+	docker exec -it todo-nginx php artisan make:migration $(name)
 
 migrate: ## Perform migrations
-	docker exec -it printer-manager-nginx php artisan migrate
+	docker exec -it todo-nginx php artisan migrate
 
 fresh: ## Perform fresh migrations
-	docker exec -it printer-manager-nginx php artisan migrate:fresh
+	docker exec -it todo-nginx php artisan migrate:fresh
 
 rollback: ## Rollback migration
-	docker exec -it printer-manager-nginx php artisan migrate:rollback
+	docker exec -it todo-nginx php artisan migrate:rollback
 
 ##@ Composer
 
 install: ## Composer install dependencies
-	docker exec -it printer-manager-nginx composer install
+	docker exec -it todo-nginx composer install
 
 autoload: ## Run the composer dump
-	docker exec -it printer-manager-nginx composer dump-autoload
+	docker exec -it todo-nginx composer dump-autoload
 
 ##@ Queue
 
 queue: ## Listen queue
-	docker exec -it printer-manager-nginx php artisan queue:listen
+	docker exec -it todo-nginx php artisan queue:listen
 
 ##@ Permissions
 
 permissions: ## Set permissions
-	docker exec -it printer-manager-nginx chmod -R 777 storage
+	docker exec -it todo-nginx chmod -R 777 storage
 
 ##@ Storage Link
 
 link: ## Set permissions
-	docker exec -it printer-manager-nginx php artisan storage:link
+	docker exec -it todo-nginx php artisan storage:link
 
 ##@ Eloquent
 
 model: ## Create model
-	docker exec -it printer-manager-nginx php artisan make:model $(name)
+	docker exec -it todo-nginx php artisan make:model $(name)
 
 controller: ## Create controller
-	docker exec -it printer-manager-nginx php artisan make:controller $(name)
+	docker exec -it todo-nginx php artisan make:controller $(name)
 
 request: ## Create request
-	docker exec -it printer-manager-nginx php artisan make:request $(name)
+	docker exec -it todo-nginx php artisan make:request $(name)
 
 ##@ Helpers
 

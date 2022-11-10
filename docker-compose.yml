@@ -5,13 +5,13 @@ networks:
         driver: bridge
 
 volumes:
-    printer-manager-mysql-data:
+    todo-mysql-data:
         driver: local
 
 services:
-    printer-manager-nginx:
+    todo-nginx:
         image: webdevops/php-nginx-dev:8.1-alpine
-        container_name: printer-manager-nginx
+        container_name: todo-nginx
         networks:
             - internal
         working_dir: /var/www/app
@@ -20,7 +20,7 @@ services:
             - ./docker/development/php.ini:/usr/local/etc/php/conf.d/php.ini
             - ./docker/development/supervisord.conf:/opt/docker/etc/supervisor.d/supervisord.conf
         depends_on:
-            printer-manager-mysql:
+            todo-mysql:
                 condition: service_healthy
         environment:
             - WEB_DOCUMENT_ROOT=/var/www/app/public
@@ -42,14 +42,14 @@ services:
         ports:
             - "80:80"
 
-    printer-manager-mysql:
+    todo-mysql:
         image: mysql/mysql-server:8.0
-        container_name: printer-manager-mysql
+        container_name: todo-mysql
         networks:
             - internal
         working_dir: /var/www/app
         volumes:
-            - printer-manager-mysql-data:/var/lib/mysql
+            - todo-mysql-data:/var/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
             - MYSQL_DATABASE=${DB_DATABASE}
@@ -62,9 +62,9 @@ services:
         ports:
             - "3306:3306"
 
-    printer-manager-node:
+    todo-node:
         image: node:16.16.0-alpine
-        container_name: printer-manager-node
+        container_name: todo-node
         networks:
             - internal
         working_dir: /var/www/app
