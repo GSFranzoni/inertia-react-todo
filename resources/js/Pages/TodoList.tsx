@@ -24,10 +24,14 @@ type TodoListProps = {
 };
 
 const TodoList: React.FC<TodoListProps> = ({ todos }) => {
-  debugger;
-
-  const { createTodo, setDescription, description, processing } =
+  const { createTodo, setDescription, description, processing, wasSuccessful } =
     useCreateTodo();
+
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [wasSuccessful]);
 
   return (
     <MainLayout>
@@ -38,6 +42,8 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
           ))}
           <InputGroup width="100%" size="lg">
             <Input
+              autoFocus
+              ref={inputRef}
               placeholder="Add new todo"
               disabled={processing}
               value={description}
