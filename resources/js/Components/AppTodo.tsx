@@ -27,7 +27,7 @@ const AppTodo: React.FC<AppTodoProps> = ({ todo, ...props }) => {
   const { deleteTodo, processing: deleting } = useDeleteTodo();
   const { updateCompletedTodo, processing: updating } = useCompleteTodo();
   return (
-    <AppCard borderRadius={10} {...props} boxShadow="base">
+    <AppCard padding={4} borderRadius={5} {...props} boxShadow="base">
       <HStack justifyContent="space-between">
         <Text textDecoration={todo.completed ? 'line-through' : 'none'}>
           {todo.description}
