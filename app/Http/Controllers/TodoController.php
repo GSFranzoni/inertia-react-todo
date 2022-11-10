@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTodoRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Controller;
 use Inertia\Response;
@@ -29,5 +31,17 @@ class TodoController extends Controller
                 ],
             ],
         ]);
+    }
+
+    /**
+     * @param CreateTodoRequest $request
+     * @return RedirectResponse
+     */
+    public function store(CreateTodoRequest $request): RedirectResponse
+    {
+        $request->user()->todos()->create($request->validated());
+        return redirect()
+            ->intended(route('todos.index'))
+            ->with('success', __('todo.created'));
     }
 }

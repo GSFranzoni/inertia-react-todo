@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/home', TodoController::class)->name('todos.index');
+Route::post('/todos', [TodoController::class, 'store'])->name('todos.store');
 
 /*
 |--------------------------------------------------------------------------

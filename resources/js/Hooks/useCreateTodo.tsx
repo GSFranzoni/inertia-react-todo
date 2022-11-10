@@ -2,7 +2,9 @@ import { useForm } from '@inertiajs/inertia-react';
 import { useToast } from '@chakra-ui/react';
 
 const useCreateTodo = () => {
-  const { post, data, setData, ...rest } = useForm();
+  const { post, data, setData, ...rest } = useForm({
+    description: '',
+  });
 
   const toast = useToast();
 
