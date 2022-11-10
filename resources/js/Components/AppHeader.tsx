@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { MdLogout } from 'react-icons/all';
-import useLogout from '../Hooks/Logout';
+import useLogout from '../Hooks/useLogout';
 
 const AppHeader: React.FC<BoxProps> = ({ ...props }) => {
   const { colorMode, toggleColorMode } = useColorMode();

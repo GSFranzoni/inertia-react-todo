@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\FakeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/home', HomeController::class)->name('home');
-Route::post('/fake', FakeController::class)->name('fake');
+Route::get('/home', TodoController::class)->name('todos.index');
 
 /*
 |--------------------------------------------------------------------------
