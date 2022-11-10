@@ -41,6 +41,7 @@ const Login = () => {
         <AppTextField
           label="Password"
           name="password"
+          type="password"
           value={data.password}
           hint={errors?.password}
           onChange={(e) => setData('password', e.target.value)}
